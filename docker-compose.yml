@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15.3-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "voorjane"
+      POSTGRES_PASSWORD: "v"
+    ports:
+      - "5432:5432"
+    restart: always
+  app:
+    image: golang:1.23-rc-alpine
+    build:
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/usr/src/app
+    depends_on:
+      - postgres
+    restart: "no"

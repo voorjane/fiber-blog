@@ -1,0 +1,19 @@
+{{ define "index" }}
+
+    {{ template "header" }}
+    <main role="main" class="inner cover">
+        {{ range .Posts }}
+            <div class="alert alert-dark">
+                <h2>{{ .Title }}</h2>
+                <p>{{ .Announce }}</p>
+                <a href="/post/{{ .Id }}" class="btn btn-dark">Open article</a>
+            </div>
+        {{ else }}
+            <p class="lead">No articles yet, try to make one in <a href="/sign_in" class="text-white"> admin panel</a></p>
+        {{ end }}
+        {{ range .Pages }}
+            <a href="?page={{ . }}" class="btn btn-dark">{{ . }}</a>
+        {{ end }}
+    </main>
+    {{ template "footer" }}
+{{ end }}
